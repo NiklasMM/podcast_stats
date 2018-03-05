@@ -9,11 +9,11 @@ setuptools.setup(
     author_email="github@niklas-meinzer.de",
 
     description="A script to pull the rss feed for a podcast and run some analysis on it.",
-    long_description=open('README.rst').read(),
+    long_description=open('README.md').read(),
 
     packages=setuptools.find_packages(),
 
-    install_requires=['feedparser', 'terminaltables'],
+    install_requires=['feedparser', 'terminaltables', 'click'],
 
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
