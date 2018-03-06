@@ -1,6 +1,8 @@
 podcast_stats
 =============
 
+[![Build Status](https://travis-ci.org/NiklasMM/podcast_stats.svg?branch=master)](https://travis-ci.org/NiklasMM/podcast_stats)
+
 A script to pull the rss feed for a podcast and run some analysis on it.
 
 Usage
