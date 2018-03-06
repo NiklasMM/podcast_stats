@@ -1,5 +1,8 @@
 import setuptools
 
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
 setuptools.setup(
     name="podcast_stats",
     version="0.1.0",
@@ -13,16 +16,14 @@ setuptools.setup(
 
     packages=setuptools.find_packages(),
 
-    install_requires=['feedparser', 'terminaltables', 'click'],
+    install_requires=requirements,
 
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
 
     entry_points='''
