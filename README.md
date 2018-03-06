@@ -1,7 +1,7 @@
 podcast_stats
 =============
 
-[![Build Status](https://travis-ci.org/NiklasMM/podcast_stats.svg?branch=master)](https://travis-ci.org/NiklasMM/podcast_stats)
+[![Build Status](https://travis-ci.org/NiklasMM/podcast_stats.svg?branch=master)](https://travis-ci.org/NiklasMM/podcast_stats) [![codecov](https://codecov.io/gh/NiklasMM/podcast_stats/branch/master/graph/badge.svg)](https://codecov.io/gh/NiklasMM/podcast_stats)
 
 A script to pull the rss feed for a podcast and run some analysis on it.
 
