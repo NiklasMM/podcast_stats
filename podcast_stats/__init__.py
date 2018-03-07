@@ -36,8 +36,9 @@ def get_parsed_feed(feed_url):
         episodes.append(
             {
                 "title": entry.title,
-                "published_datetime": published_datetime.strftime("%Y-%m-%d"),
-                "time_since_last": time_since_last
+                "published_datetime": published_datetime,
+                "time_since_last": time_since_last,
+                "published": True
             }
         )
         last_datetime = published_datetime
@@ -45,8 +46,19 @@ def get_parsed_feed(feed_url):
     # Add a dummy episode to measure the time from the last episode until now
     episodes.append({
         "title": "[Next unpublished episode]",
-        "published_datetime": "unknown",
-        "time_since_last": datetime.now() - last_datetime
+        "published_datetime": datetime.now(),
+        "time_since_last": datetime.now() - last_datetime,
+        "published": False
     })
 
     return episodes
+
+
+def weekday_distribution(feed):
+    result = [0] * 7
+
+    for entry in feed:
+        if entry["published"]:
+            result[entry["published_datetime"].weekday()] += 1
+
+    return result
