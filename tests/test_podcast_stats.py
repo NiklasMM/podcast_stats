@@ -1,4 +1,4 @@
-from podcast_stats import get_parsed_feed
+from podcast_stats import get_parsed_feed, weekday_distribution
 from podcast_stats.main import run
 
 from unittest import mock
@@ -11,23 +11,27 @@ def dummy_feed():
     feed = {
         "entries": []
     }
-    now = datetime.now()
+    # we start on a Sunday
+    start = datetime(2017, 1, 1)
     feed["entries"].append(
         mock.Mock(
             title="Latest Episode",
-            published_parsed=(now - timedelta(days=1)).timetuple()
+            # this episode is on a Saturday
+            published_parsed=(start - timedelta(days=1)).timetuple()
         )
     )
     feed["entries"].append(
         mock.Mock(
             title="Previous Episode",
-            published_parsed=(now - timedelta(days=7)).timetuple()
+            # this episode is on a Sunday
+            published_parsed=(start - timedelta(days=7)).timetuple()
         )
     )
     feed["entries"].append(
         mock.Mock(
             title="First Episode",
-            published_parsed=(now - timedelta(days=20)).timetuple()
+            # this episode is on a Monday
+            published_parsed=(start - timedelta(days=20)).timetuple()
         )
     )
     return feed
@@ -49,3 +53,15 @@ def test_cli(dummy_feed):
     with mock.patch("podcast_stats.feedparser.parse", return_value=dummy_feed):
         result = runner.invoke(run, ['--feed_url', 'http://feed.url'])
     assert result.exit_code == 0
+
+def test_week_day_distribution(dummy_feed):
+    with mock.patch("podcast_stats.feedparser.parse", return_value=dummy_feed):
+        feed = get_parsed_feed("")
+
+    weekday_distr = weekday_distribution(feed)
+
+    assert weekday_distr[0] == 1
+    assert weekday_distr[1] == 0
+    assert weekday_distr[2] == 0
+    assert weekday_distr[5] == 1
+    assert weekday_distr[6] == 1
